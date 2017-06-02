@@ -14,16 +14,10 @@ class BaseAuthHTTPRequestHandler(BaseHTTPRequestHandler):
         BaseAuthHTTPRequestHandler
         Base Auth HTTP Handler
     """
-    users = []
-
-    def set_authorization_list(self, users: dict):
-        """
-        set_authorization_list
-
-        :param users:
-        """
-        self.users = users
-        pass
+    users = {
+        'test': 'test',
+        'dev': 'dev'
+    }
 
     def _pre_auth(self):
         """
@@ -41,7 +35,7 @@ class BaseAuthHTTPRequestHandler(BaseHTTPRequestHandler):
             user, password = tuple(decoded_token.split(":"))
             if self.users[user] == password:
                 # test:test
-                print("Authorization succeeded - None")
+                print("Authorization succeeded - SUCCESS")
                 self.do_HEAD()
             else:
                 print("Authorization Failed - nonsense provided")
